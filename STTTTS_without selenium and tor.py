@@ -12,63 +12,20 @@ from googletrans import Translator
 import json
 import wave
 from playsound import playsound
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-
-
-#chrome_options = Options()
-#chrome_options.add_argument('--log-level=3')
-#chrome_options.headless = True
-#PathofDriver = "Driver\\chromedriver.exe"
-#driver = webdriver.Chrome(PathofDriver,options=chrome_options)
-#driver.maximize_window()
-
-#Website = f'https://ttsmp3.com/text-to-speech/British%20English/'
-
-
 
 
 current_time = time.strftime("%I:%M:%S")
-openai.api_key = "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"
+openai.api_key = "YOUR_API"
 translator = Translator()
 engine = pyttsx3.init()
 r = sr.Recognizer()
 mic = sr.Microphone(device_index=0)
 
 
-def Speak_ge(Text):
-    driver.get(Website)
-    ButtonSelection = Select(driver.find_element(by=By.XPATH, value='/html/body/div[4]/div[2]/form/select'))
-    ButtonSelection.select_by_visible_text('German / Vicki')
-    print("")
-    print(f" AI : {Text}.")
-    print("")
-    Data = str(Text)
-    xpathtec = '/html/body/div[4]/div[2]/form/textarea'
-    driver.find_element(by=By.XPATH, value=xpathtec).send_keys(Data)
-    driver.find_element(by=By.XPATH, value='//*[@id="vorlesenbutton"]').click()
-    driver.find_element(by=By.XPATH, value='/html/body/div[4]/div[2]/form/textarea').clear()
-    #sleep(2)
-    
-
-
-def start_program(program_name):
-  os.system("start " + program_name)
-  print("Das Programm wurde gestartet.")
-
-
-def stop_program(program_name):
-  os.system("taskkill /im " + program_name + " /f")
-  print("Das Programm wurde beendet.")
-
-
-
-def armode():
+def armode(): # for the Arabic Language Mode
     while True:
         conversation = ""
-        user_name = "Mohamad"
+        user_name = "Your Name !will work better if you write it in Arabic"
         bot_name = "ليلى"
         with mic as source:
             print("\n" + current_time + " تكلم مع الذكاء الاصطناعي...")
@@ -111,32 +68,10 @@ def armode():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def kimode():
+def kimode(): # for the German Language Mode
     while True:
         conversation= "" 
-        user_name = "Mohamad"
+        user_name = "YOUR NAME"
         bot_name = "Layla"
         with mic as source:
             winsound.Beep(frequency=1000, duration=100)
@@ -176,15 +111,11 @@ def kimode():
 
 
 
-def aimode():
-    engine.setProperty('voice', "com.apple.speech.synthesis.voice.alex")
-            
-    engine.say("Ich höre")
+def aimode():  # for the Arabic Language Mode
     while True:
-        
         conversation = ""
-        user_name = "Mohamad"
-        bot_name = "Habibi"
+        user_name = "YOUR_NAME"
+        bot_name = "Layla"
         with mic as source:
             print("\n" + current_time + " AI listening...")
             r.adjust_for_ambient_noise(source, duration=0.2 )
@@ -220,15 +151,6 @@ def sd():
     os.system("shutdown /s /t 1")
 
 
-
-
-#pygame.mixer.init()
-#pygame.mixer.music.load("Startup_Sound.mp3")
-#pygame.mixer.music.play()
-#while pygame.mixer.music.get_busy():
-#    continue
-#pygame.mixer.music.stop()
-#pygame.quit()
 while True:
     try:
         response = requests.get("https://www.google.com")
@@ -239,7 +161,7 @@ while True:
     except requests.ConnectionError:
         print("Internet connection is not working.")
     with mic as source:
-        print("\n" + current_time + " Warten auf Ruf ...")
+        print("\n" + current_time + " Waiting for Command ...")
         r.adjust_for_ambient_noise(source, duration=0.2 )
         audio = r.listen(source)
 
@@ -268,30 +190,13 @@ while True:
         winsound.Beep(frequency=500, duration=1050)
         armode()
         
-    elif "open" in user_input:
-      program_name = user_input.split("open")[-1]
-      start_program(program_name)
-
-
-    elif "close" in user_input:
-      program_name = user_input.split("close")[-1]
-      stop_program(program_name)
 
     elif user_input == "sleep" :
         winsound.Beep(frequency=500, duration=500)
         winsound.Beep(frequency=500, duration=500)
         break
     elif user_input == "shut down now" :
-        pygame.mixer.init()
-        pygame.mixer.music.load("Shutdown_Sound.mp3")
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():
-            continue
-        pygame.mixer.music.stop()
-        pygame.quit()
         sd()
-    
-        
-    
+
     else:
         continue
