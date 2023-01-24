@@ -20,7 +20,7 @@ chrome_options.add_argument('--log-level=3')
 chrome_options.headless = True
 driver = webdriver.Chrome("Driver\\chromedriver.exe",options=chrome_options)
 driver.maximize_window()
-openai.api_key = "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"
+openai.api_key = "YOUR_API"
 r = sr.Recognizer()
 mic = sr.Microphone(device_index=0)
 
@@ -66,6 +66,7 @@ def Sprachmodus():
             audio = r.listen(source, phrase_time_limit=5)
         print("....\n")
         try:
+             #change "de" -> "en" to recognize english language
             user_input = r.recognize_google(audio, language= "de")
             print(" : " + user_input)
             i = 0
