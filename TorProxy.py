@@ -9,7 +9,7 @@ from stem.control import Controller
 def Toron():
     global tor_process
     SOCKS_PORT = 9050
-    TOR_PATH = os.path.normpath("C:\\Users\\Mohamad\\Desktop\\Tor Browser\\Browser\\TorBrowser\\Tor\\tor.exe")
+    TOR_PATH = os.path.normpath("Path to tor.exe")
     tor_process = stem.process.launch_tor_with_config(
     config = {
         'SocksPort': str(SOCKS_PORT),
